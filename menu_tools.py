@@ -121,7 +121,7 @@ class RAHA_OT_InfoPopup(bpy.types.Operator):
             col.label(text="- update menu tools ")
             col.label(text="- update bug HUB + PB")
             col.label(text="- update save animation")
-#            col.label(text="memodifikasi tanpa izin dari Raha Realistis Studio sebagai pemilik resmi.")
+            col.label(text="- penambahan fitur anti lag di mini tools")
 #            col.separator()
 #            col.label(text="Saat ini, tools ini masih dalam tahap pengembangan dan akan terus diperbarui")
 #            col.label(text="dengan fitur-fitur baru. Saya juga memiliki banyak daftar tools lain")
