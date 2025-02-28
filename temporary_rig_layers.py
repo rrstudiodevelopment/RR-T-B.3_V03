@@ -161,8 +161,7 @@ class RigLayersPanel(bpy.types.Panel):
         layout = self.layout
         scene = context.scene
         
-        is_hidden = context.scene.isolate_view_hidden
-        layout.operator("view3d.isolate_toggle", text="Isolate view", icon='HIDE_ON' if is_hidden else 'HIDE_OFF', depress=is_hidden)                         
+        layout.operator("view3d.isolate_toggle", text="Toggle Isolate View", icon='HIDE_OFF')                        
         layout.operator("rig.add_selection_to_layer", text="+ Tambah Layer")
         
         if scene.temp_layers.layers:
