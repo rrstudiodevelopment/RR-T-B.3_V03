@@ -1,5 +1,31 @@
 import bpy
 
+#===================== Isolate view ========================================================== 
+class VIEW3D_OT_isolate_toggle(bpy.types.Operator):
+    bl_idname = "view3d.isolate_toggle"
+    bl_label = "Toggle Isolate View"
+    bl_description = "Isolate selected object or bone, toggle to reveal"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    is_hidden: bpy.props.BoolProperty(default=False)
+    
+    def execute(self, context):
+        obj = context.active_object
+        mode = context.object.mode if obj else 'OBJECT'
+        
+        if mode == 'POSE':  # Pose Mode
+            if self.is_hidden:
+                bpy.ops.pose.reveal()
+            else:
+                bpy.ops.pose.hide(unselected=True)
+        else:  # Object Mode
+            if self.is_hidden:
+                bpy.ops.object.hide_view_clear()
+            else:
+                bpy.ops.object.hide_view_set(unselected=True)
+        
+        self.is_hidden = not self.is_hidden  # Toggle state
+        return {'FINISHED'}
 
 #========== Class untuk menyimpan daftar objek yang disimpan sementara =======================
 class TemporaryRigLayer(bpy.types.PropertyGroup):
@@ -135,6 +161,8 @@ class RigLayersPanel(bpy.types.Panel):
         layout = self.layout
         scene = context.scene
         
+        is_hidden = context.scene.isolate_view_hidden
+        layout.operator("view3d.isolate_toggle", text="Isolate view", icon='HIDE_ON' if is_hidden else 'HIDE_OFF', depress=is_hidden)                         
         layout.operator("rig.add_selection_to_layer", text="+ Tambah Layer")
         
         if scene.temp_layers.layers:
@@ -143,11 +171,11 @@ class RigLayersPanel(bpy.types.Panel):
 
                 select_btn = row.operator("rig.select_layer_items", text=temp_layer.name)
                 select_btn.layer_index = i
-                select_btn.extend = False
+                select_btn.extend = False               
                 row.operator("rig.toggle_layer_visibility", text="", icon='HIDE_OFF' if temp_layer.is_visible else 'HIDE_ON', depress=temp_layer.is_visible).layer_index = i
                 row.operator("rig.delete_layer", text="", icon='X').layer_index = i                  
 
-classes = [TemporaryRigLayer, RigLayerManager, AddSelectionToLayer, ToggleLayerVisibility, SelectLayerItems, DeleteLayer, RigLayersPanel]
+classes = [VIEW3D_OT_isolate_toggle, TemporaryRigLayer, RigLayerManager, AddSelectionToLayer, ToggleLayerVisibility, SelectLayerItems, DeleteLayer, RigLayersPanel]
 
 def register():
     for cls in classes:
