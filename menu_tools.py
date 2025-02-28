@@ -277,7 +277,7 @@ class RAHA_OT_Donate(bpy.types.Operator):
     bl_label = "Donate"
 
     def execute(self, context):
-        webbrowser.open("https://saweria.co/rrstudio26s")
+        webbrowser.open("https://saweria.co/rrstudio26")
         return {'FINISHED'}
 #========================================= Def Subcribe Link ===================================================    
 class RAHA_OT_Subscribe(bpy.types.Operator):
