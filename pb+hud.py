@@ -174,7 +174,7 @@ class VIEW3D_OT_Playblast(bpy.types.Operator):
         render.resolution_y = resolution_y
         render.image_settings.file_format = 'FFMPEG'
         render.ffmpeg.format = 'QUICKTIME'
-        render.ffmpeg.audio_codec = 'MP3'
+        render.ffmpeg.audio_codec = 'AAC'
 
         # Render playblast
         bpy.ops.render.opengl(animation=True)
