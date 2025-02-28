@@ -123,7 +123,7 @@ class RAHA_OT_InfoPopup(bpy.types.Operator):
             col.label(text="- update save animation")
             col.label(text="- penambahan fitur anti lag di mini tools")
 #            col.separator()
-#            col.label(text="Saat ini, tools ini masih dalam tahap pengembangan dan akan terus diperbarui")
+            col.label(text="- update temporary rig layes")
 #            col.label(text="dengan fitur-fitur baru. Saya juga memiliki banyak daftar tools lain")
 #            col.label(text="yang akan dibagikan secara gratis.")        
 #            col.separator()
